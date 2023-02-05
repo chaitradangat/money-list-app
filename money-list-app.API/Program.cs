@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using money_list_app.Data;
+
 namespace money_list_app.API
 {
     public class Program
@@ -12,6 +15,12 @@ namespace money_list_app.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+                builder.Configuration.GetConnectionString("DefaultConnection")
+                )) ;
+
+
 
             var app = builder.Build();
 
